@@ -1,53 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Todo List: </h1>
-    <ul class="todoItems">
-    <!--For each of the todo list items passed from the server, create a <li>-->
-    <% for(let i=0; i < items.length; i++) {%>
-        <li class="item">
-            <!--If the item is completed, create a span with the class .completed and the text of the item-->
-            <% if(items[i].completed === true) {%>
-                <span class='completed'><%= items[i].thing %></span>
-            <% }else{ %>
-            <!--If the item is not completed, create a span with the text of the item-->
-                <span><%= items[i].thing %></span>
-            <% } %> 
-            <!--Create a trash can icon for each todo item-->   
-            <span class='fa fa-trash'></span>
-        </li>
-    <% } %>
-    </ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Skillet</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <main>
+        <h1>Skillet List </h1>
+        <ul class="dishes">
+        <!--For each of the todo list items passed from the server, create a <li>-->
+        <% for(let i=0; i < dishes.length; i++) {%>
+            <li class="dish">
+                <!--If the dish has been is cooked, create a span with the class .completed and the name of the dish-->
+                <% if(dishes[i].cooked === true) {%>
+                    <span class="cooked" id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
+                <% }else{ %>
+                <!--If the dish has not been cooked, create a span with the name of the dish-->
+                    <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
+                <% } %> 
+                <!--Create a trash can icon for each dish-->   
+                <span class="fa fa-trash"></span>
+            </li>
+        <% } %>
+        </ul>
 
-    <!--Display the number of items left to do (passed from the server)-->
-    <h2>Left to do: <%= left %></h2>
+        <h2>Add A Dish:</h2>
 
-    <h2>Add A Todo:</h2>
-
-    <!--Add a new todo by sending a POST request to the /addTodo route-->
-    <form action="/addTodo" method="POST">
-        <input type="text" placeholder="Thing To Do" name="todoItem">
-        <input type="submit">
-    </form>
-    
-
-    <script src='js/main.js'></script>
-</body>
+        <!--Add a new todo by sending a POST request to the /addTodo route-->
+        <form action="/dishes" method="POST">
+            <input type="text" placeholder="What's cooking?" name="dishName">
+            <input type="submit">
+        </form>
+        
+        <script src='js/main.js'></script>
+    </main>
+    </body>
 </html>

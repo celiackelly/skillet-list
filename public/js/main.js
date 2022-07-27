@@ -1,39 +1,39 @@
 //Select all element Nodes with the given class and assign to JS variables
 const deleteBtn = document.querySelectorAll('.fa-trash')
-const item = document.querySelectorAll('.item span')
-const itemCompleted = document.querySelectorAll('.item span.completed')
+const dish = document.querySelectorAll('.dish span')
+const dishCooked = document.querySelectorAll('.dish span.cooked')
 
 //Create an array from the NodeList 'deleteBtn'
 //Attach an event listener to each item in the array; on click, call deleteItem function 
 Array.from(deleteBtn).forEach((element)=>{
-    element.addEventListener('click', deleteItem)
+    element.addEventListener('click', deleteDish)
 })
 
-//Create an array from the NodeList 'item'
-//Attach an event listener to each item; on click, call markComplete function
-Array.from(item).forEach((element)=>{
-    element.addEventListener('click', markComplete)
+//Create an array from the NodeList 'dish'
+//Attach an event listener to each item; on click, call markCooked function
+Array.from(dish).forEach((element)=>{
+    element.addEventListener('click', markCooked)
 })
 
-//Create an array from the NodeList 'itemCompleted'
-//Attach an event listener to each completed item; on click, call markUnComplete function
-Array.from(itemCompleted).forEach((element)=>{
-    element.addEventListener('click', markUnComplete)
+//Create an array from the NodeList 'dishCooked'
+//Attach an event listener to each completed item; on click, call markNotCooked function
+Array.from(dishCooked).forEach((element)=>{
+    element.addEventListener('click', markNotCooked)
 })
 
-async function deleteItem(){
-    //Get the text of the to-do item associated with this delete button
-    const itemText = this.parentNode.childNodes[1].innerText
+async function deleteDish(){
+    //Get the _id of the to-do item associated with this delete button
+    const dishID = this.parentNode.children[0].id
     try{
         //Make a fetch call to the /deleteItem route on the server and send the todo item text in the body of the request  
-        const response = await fetch('deleteItem', {
+        const response = await fetch('deleteDish', {
             //use the delete HTTP method
             method: 'delete',
             //declare the content-type of the data to be sent
             headers: {'Content-Type': 'application/json'},
             //make a JSON object to send in the body 
             body: JSON.stringify({
-              'itemFromJS': itemText
+              'dishIDfromJS': dishID
             })
           })
         //await the response from the server
@@ -49,19 +49,21 @@ async function deleteItem(){
     }
 }
 
-async function markComplete(){
-    //Get the text of the to-do item
-    const itemText = this.parentNode.childNodes[1].innerText
+//Not fixed yet
+async function markCooked(){
+    //Get the _id of the to-do item
+    const dishID = this.parentNode.children[0].id
+    console.log(dishID)
     try{
         //Make a fetch call to the /markComplete route on the server and send the todo item text in the body of the request  
-        const response = await fetch('markComplete', {
+        const response = await fetch('markCooked', {
             //use the PUT HTTP method
             method: 'put',
             //declare the content-type of the data to be sent
             headers: {'Content-Type': 'application/json'},
             //make a JSON object to send in the body 
             body: JSON.stringify({
-                'itemFromJS': itemText
+                'dishIDfromJS': dishID
             })
           })
         //await the response from the server
@@ -77,19 +79,19 @@ async function markComplete(){
     }
 }
 
-async function markUnComplete(){
-    //Get the text of the to-do item
-    const itemText = this.parentNode.childNodes[1].innerText
+async function markNotCooked(){
+    //Get the _id of the to-do item
+    const dishID = this.parentNode.children[0].id
     try{
         //Make a fetch call to the /markComplete route on the server and send the todo item text in the body of the request  
-        const response = await fetch('markUnComplete', {
+        const response = await fetch('markNotCooked', {
             //use the PUT HTTP method
             method: 'put',
             //declare the content-type of the data to be sent
             headers: {'Content-Type': 'application/json'},
             //make a JSON object to send in the body 
             body: JSON.stringify({
-                'itemFromJS': itemText
+                'dishIDfromJS': dishID
             })
           })
         //await the response from the server
