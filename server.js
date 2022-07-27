@@ -40,7 +40,12 @@ app.get('/', async (request, response)=>{
 //Handle POST (CREATE) requests on the dishes route 
 app.post('/dishes', (request, response) => {
     //Add new a document to the db. 
-    db.collection('dishes').insertOne({dishName: request.body.dishName, cooked: false})
+    db.collection('dishes').insertOne({
+        dishName: request.body.dishName,
+        meal: request.body.meal, 
+        link: request.body.link,  
+        cooked: false
+    })
     .then(result => {
         //If successful, log to the console and make a new GET request to reload the main route 
         console.log('Dish Added') 
