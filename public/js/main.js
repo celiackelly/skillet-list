@@ -1,4 +1,5 @@
 //Select all element Nodes with the given class and assign to JS variables
+//can you refactor all these event listeners with event delegation?
 const deleteBtn = document.querySelectorAll('.fa-circle-xmark')
 const cookedBtn = document.querySelectorAll('.fa-utensils')
 const dish = document.querySelectorAll('.dish span')

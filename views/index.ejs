@@ -20,7 +20,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-sm bg-white">
+            <nav class="navbar navbar-expand-sm bg-warning">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">
                         <img src="/img/skillet-icon.png" alt="" class="d-inline-block align-top">
@@ -67,9 +67,11 @@
 
                                             <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                 <!--Create a utensil (cooked) item for each dish-->
-                                                <button type="button" class="btn btn-success fa-solid fa-utensils"></button>
+                                                <button type="button" class="btn btn-light fa-solid fa-utensils"></button>
+                                                <!--Create a pencil (edit) item for each dish-->
+                                                <button type="button" class="btn btn-light fa-solid fa-pencil"></button>
                                                 <!--Create an X (delete) icon for each dish-->   
-                                                <button type="button" class="btn btn-danger fa-solid fa-circle-xmark"></button>
+                                                <button type="button" class="btn btn-light fa-solid fa-circle-xmark"></button>
                                             </div>
                                         </li>
                                     <% } %>
@@ -97,7 +99,7 @@
             </div>
         </main>
 
-        <footer class="fixed-bottom p-3">
+        <footer class="bg-white p-3">
             <div class="container">
                 <span>Image by <a href="https://www.rawpixel.com/">rawpixel.com</a></span>
             </div>
