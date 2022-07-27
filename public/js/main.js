@@ -49,13 +49,11 @@ async function deleteDish(){
     }
 }
 
-//Not fixed yet
 async function markCooked(){
-    //Get the _id of the to-do item
+    //Get the _id of the dish
     const dishID = this.parentNode.children[0].id
-    console.log(dishID)
     try{
-        //Make a fetch call to the /markComplete route on the server and send the todo item text in the body of the request  
+        //Make a fetch call to the /markCooked route on the server and send the dish _id in the body of the request  
         const response = await fetch('markCooked', {
             //use the PUT HTTP method
             method: 'put',
@@ -80,29 +78,21 @@ async function markCooked(){
 }
 
 async function markNotCooked(){
-    //Get the _id of the to-do item
     const dishID = this.parentNode.children[0].id
     try{
-        //Make a fetch call to the /markComplete route on the server and send the todo item text in the body of the request  
         const response = await fetch('markNotCooked', {
-            //use the PUT HTTP method
             method: 'put',
-            //declare the content-type of the data to be sent
             headers: {'Content-Type': 'application/json'},
-            //make a JSON object to send in the body 
             body: JSON.stringify({
                 'dishIDfromJS': dishID
             })
           })
-        //await the response from the server
+
         const data = await response.json()
-        //log the server response
         console.log(data)
-        //reload the page
         location.reload()
 
     }catch(err){
-        //catch and log any errors
         console.log(err)
     }
 }

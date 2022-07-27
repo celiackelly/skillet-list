@@ -49,21 +49,20 @@ app.post('/dishes', (request, response) => {
     .catch(error => console.error(error))  //If there's an error, log it
 })
 
-//Handle PUT (UPDATE) requests to the /markComplete route 
-//Triggered when a todo list item is clicked on the front end
+//Handle PUT (UPDATE) requests to the /markCooked route 
+//Triggered when a dish is clicked on the front end
 app.put('/markCooked', (request, response) => {
-    // In the db 'todos' collection, find the document where the 'thing' value matches the item text passed in the request body and update it
+    // In the db 'dishes' collection, find the document by _id and update it
     db.collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
         //set the value of 'completed' to true
         $set: {
             cooked: true
         }
     },{
-        sort: {_id: -1},   // If more than one matching document is returned, sort them in descending order by _id (so that we update only the one with the lower _id value)
         upsert: false  // Doesn't create a new document if the query doesn't find a matching document
     })
     .then(result => {
-        //If successful, log to the console and send 'Marked Complete' response to the front end
+        //If successful, log to the console and send 'Marked Cooked' response to the front end
         console.log('Marked Cooked')
         //I think .json() also automatically sets the HTTP status code to 200 and the content-type to application/json, which is handy
         response.json('Marked Cooked')
@@ -72,17 +71,16 @@ app.put('/markCooked', (request, response) => {
     .catch(error => console.error(error))
 })
 
-//Handle PUT (UPDATE) requests to the /markUnComplete route
-//Triggered when a completed todo list item is clicked on the front end
+//Handle PUT (UPDATE) requests to the /markNotCooked route
+//Triggered when a cooked dish is clicked on the front end
 //Do the opposite of the /markComplete route
 app.put('/markNotCooked', (request, response) => {
-    // In the db 'todos' collection, find the document where the 'thing' value matches the item text passed in the request body and update it
+    // In the db 'dishes' collection, find the document by _id and update it
     db.collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
         $set: {
             cooked: false  //set the value of 'completed' to false
           }
     },{
-        sort: {_id: -1},  // If more than one matching document is returned, sort them in descending order by _id (so that we update only the one with the lower _id value)
         upsert: false  // Doesn't create a new document if the query doesn't find a matching document
     })
     .then(result => {
