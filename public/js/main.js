@@ -1,5 +1,5 @@
 //Select all element Nodes with the given class and assign to JS variables
-const deleteBtn = document.querySelectorAll('.fa-trash')
+const deleteBtn = document.querySelectorAll('.fa-circle-xmark')
 const dish = document.querySelectorAll('.dish span')
 const dishCooked = document.querySelectorAll('.dish span.cooked')
 

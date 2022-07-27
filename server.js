@@ -3,7 +3,7 @@ const express = require('express')
 //Create Express application
 const app = express()
 
-//Import MongoDB library; destructure to get access to ObjectID
+//Import MongoDB library; destructure to get access to ObjectId 
 const { MongoClient, ObjectId } = require('mongodb')
 //Assign local port number
 const PORT = 2121
