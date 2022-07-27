@@ -1,4 +1,30 @@
-h1{
+/* html {
+    font-size: 62.5%;
+} */
+
+body {
+    font-family: 'Dosis', sans-serif;
+}
+
+.navbar-brand span {
+    padding-left: 2rem;
+}
+
+.navbar-brand {
+    background: no-repeat url("../img/skillet-icon.png") left/2rem;
+}
+
+body::before {
+    display: block;
+    content: '';
+    height: 4rem;
+}
+
+/* .hero {
+    padding-top: 80px;
+} */
+
+h1 {
     color: red;
 }
 .cooked{
