@@ -43,7 +43,7 @@ app.post('/dishes', (request, response) => {
     db.collection('dishes').insertOne({
         dishName: request.body.dishName,
         meal: request.body.meal, 
-        link: request.body.link,  
+        recipeLink: request.body.recipeLink,  
         cooked: false
     })
     .then(result => {
