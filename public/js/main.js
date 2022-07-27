@@ -16,6 +16,7 @@ Array.from(cookedBtn).forEach((element)=>{
     element.addEventListener('click', markCooked)
 })
 
+//THIS NEEDS TO BE CHANGED
 //Create an array from the NodeList 'dish'
 //Attach an event listener to each item; on click, call markCooked function
 Array.from(dish).forEach((element)=>{
