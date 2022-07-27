@@ -42,13 +42,14 @@
             </nav>
         </header>
         <main>
+            <div class="row">
             <section class="hero">
-                <div class="container p-3">
+                <div class="container p-3 text-center col-8">
                     <h1>Skillet List </h1>
-                    <ul class="dishes">
+                    <ul class="dishes list-group">
                     <!--For each of the todo list items passed from the server, create a <li>-->
                     <% for(let i=0; i < dishes.length; i++) {%>
-                        <li class="dish">
+                        <li class="dish list-group-item">
                             <!--If the dish has been is cooked, create a span with the class .completed and the name of the dish-->
                             <% if(dishes[i].cooked === true) {%>
                                 <span class="cooked" id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
@@ -75,6 +76,7 @@
                     </form>
                 </div>
             </section>
+        </div>
 
         </main>
         <footer class="fixed-bottom">
