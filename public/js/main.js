@@ -1,7 +1,7 @@
 //Select all element Nodes with the given class and assign to JS variables
 const deleteBtn = document.querySelectorAll('.fa-circle-xmark')
+const cookedBtn = document.querySelectorAll('.fa-utensils')
 const dish = document.querySelectorAll('.dish span')
-const dishCooked = document.querySelectorAll('.dish span.cooked')
 
 //Create an array from the NodeList 'deleteBtn'
 //Attach an event listener to each item in the array; on click, call deleteItem function 
@@ -9,21 +9,21 @@ Array.from(deleteBtn).forEach((element)=>{
     element.addEventListener('click', deleteDish)
 })
 
-//Create an array from the NodeList 'dish'
-//Attach an event listener to each item; on click, call markCooked function
-Array.from(dish).forEach((element)=>{
+//Create an array from the NodeList 'cookedBtn'
+//Attach an event listener to each completed item; on click, call markNotCooked function
+Array.from(cookedBtn).forEach((element)=>{
     element.addEventListener('click', markCooked)
 })
 
-//Create an array from the NodeList 'dishCooked'
-//Attach an event listener to each completed item; on click, call markNotCooked function
-Array.from(dishCooked).forEach((element)=>{
-    element.addEventListener('click', markNotCooked)
+//Create an array from the NodeList 'dish'
+//Attach an event listener to each item; on click, call markCooked function
+Array.from(dish).forEach((element)=>{
+    element.addEventListener('click', editDishInfo)
 })
 
 async function deleteDish(){
     //Get the _id of the to-do item associated with this delete button
-    const dishID = this.parentNode.children[0].id
+    const dishID = this.parentNode.parentNode.children[0].id
     try{
         //Make a fetch call to the /deleteItem route on the server and send the todo item text in the body of the request  
         const response = await fetch('deleteDish', {
@@ -51,7 +51,7 @@ async function deleteDish(){
 
 async function markCooked(){
     //Get the _id of the dish
-    const dishID = this.parentNode.children[0].id
+    const dishID = this.parentNode.parentNode.children[0].id
     try{
         //Make a fetch call to the /markCooked route on the server and send the dish _id in the body of the request  
         const response = await fetch('markCooked', {
@@ -77,7 +77,8 @@ async function markCooked(){
     }
 }
 
-async function markNotCooked(){
+//Not updated yet - still marks as not cooked
+async function editDishInfo(){
     const dishID = this.parentNode.children[0].id
     try{
         const response = await fetch('markNotCooked', {

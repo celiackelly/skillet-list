@@ -63,11 +63,14 @@
                                             <% }else{ %>
                                             <!--If the dish has not been cooked, create a span with the name of the dish-->
                                                 <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
-                                            <% } %> 
-                                            <!--Create an X (delete) icon for each dish-->   
-                                            <span class="fa-solid fa-circle-xmark"></span>
-                                            <!--Create a utensil (cooked) item for each dish-->
-                                            <span class="fa-solid fa-utensils"></span>
+                                            <% } %>
+
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <!--Create a utensil (cooked) item for each dish-->
+                                                <button type="button" class="btn btn-success fa-solid fa-utensils"></button>
+                                                <!--Create an X (delete) icon for each dish-->   
+                                                <button type="button" class="btn btn-danger fa-solid fa-circle-xmark"></button>
+                                            </div>
                                         </li>
                                     <% } %>
 

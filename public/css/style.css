@@ -10,9 +10,6 @@ body {
     width: 2rem;
 }
 
-h1 {
-    color: red;
-}
 .cooked{
     color: gray;
     text-decoration: line-through;
