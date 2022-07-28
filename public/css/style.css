@@ -10,6 +10,10 @@ body {
     width: 2rem;
 }
 
+h1 img {
+    width: 3rem;
+}
+
 .cooked{
     color: gray;
     text-decoration: line-through;
