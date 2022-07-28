@@ -4,6 +4,11 @@ html {
 
 body {
     font-family: 'Dosis', sans-serif;
+    height: 100%;
+}
+
+main {
+    min-height: 80vh;
 }
 
 .navbar-brand img {
