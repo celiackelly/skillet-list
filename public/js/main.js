@@ -34,10 +34,26 @@ class DishLiBtnGroup {
         }
     }
 
-    edit() {
-        alert('editing')   
-    }
+    populateEditModal(e) {
+        //Get the _id of the dish associated with this edit button
+        let li = e.target.closest('li')
+        if (!li) return
+        const dishID = li.id
 
+        //Populate the modal's name field with the name of the dish list item being edited
+        const editDishNameInput = document.querySelector('#editDishNameInput')
+        editDishNameInput.value = li.querySelector('.dishName').innerText
+
+        //Populate the modal's meal select field with the meal of the dish list item being edited
+        const editMealSelect = document.querySelector('#editMealSelect')
+        editMealSelect.value = li.querySelector('.mealBadge').innerText
+
+        //Populate the modal's link field with the recipe link of the dish list item being edited, if any
+        const editRecipeLinkInput = document.querySelector('#editRecipeLinkInput')
+        const recipeLink = li.querySelector('.recipeLink')
+        editRecipeLinkInput.value = recipeLink ? recipeLink.href : ''
+    }
+    
     async delete(e) {
         //Get the _id of the dish associated with this delete button
         let li = e.target.closest('li')
@@ -69,31 +85,4 @@ Array.from(dishLiBtnGroups).forEach((btnGroup)=>{
 })
 
 
-// async function markCooked(){
-//     //Get the _id of the dish
-//     const dishID = this.parentNode.parentNode.children[0].children[1].id
-//     try{
-//         //Make a fetch call to the /markCooked route on the server and send the dish _id in the body of the request  
-//         const response = await fetch('markCooked', {
-//             //use the PUT HTTP method
-//             method: 'put',
-//             //declare the content-type of the data to be sent
-//             headers: {'Content-Type': 'application/json'},
-//             //make a JSON object to send in the body 
-//             body: JSON.stringify({
-//                 'dishIDfromJS': dishID
-//             })
-//           })
-//         //await the response from the server
-//         const data = await response.json()
-//         //log the server response
-//         console.log(data)
-//         //reload the page
-//         location.reload()
-
-//     }catch(err){
-//         //catch and log any errors
-//         console.log(err)
-//     }
-// }
 

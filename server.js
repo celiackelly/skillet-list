@@ -76,6 +76,7 @@ app.put('/markCooked', (request, response) => {
     .catch(error => console.error(error))
 })
 
+//NOTHING TRIGGERS THIS RIGHT NOW
 //Handle PUT (UPDATE) requests to the /markNotCooked route
 //Triggered when a cooked dish is clicked on the front end
 //Do the opposite of the /markComplete route
