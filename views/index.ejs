@@ -54,7 +54,7 @@
         <main>
             <div class="container-fluid">
                 <div class="row justify-content-center py-3">
-                    <div class="col-md-6">
+                    <div class="col-md-8 px-3">
 
                         <!--Hero Section - What's Cooking?-->
 
@@ -65,11 +65,16 @@
                                         <% if(dishes[i].cooked === false) {%>
                                         <!--For each dish passed from the server, if dish has NOT been cooked, create li for dish-->
                                         <li class="dish list-group-item d-flex justify-content-between align-items-center">
-                                            <% if(dishes[i].recipeLink) {%> 
-                                                <a href="<%= dishes[i].recipeLink %>" id="<%= dishes[i]._id %>" target="_blank"><span><%= dishes[i].dishName %></span></a>
-                                            <%} else {%> 
-                                                <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
-                                            <%} %> 
+                                            <div>
+                                                <span class="badge rounded-pill bg-warning text-dark"><%= dishes[i].meal %></span>
+                                                <% if(dishes[i].recipeLink) {%> 
+                                                    <a href="<%= dishes[i].recipeLink %>" id="<%= dishes[i]._id %>" target="_blank">
+                                                        <span><%= dishes[i].dishName %></span>
+                                                    </a>
+                                                <%} else {%> 
+                                                    <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
+                                                <%} %> 
+                                            </div>
                                             <div class="btn-group" role="group" aria-label="Edit this dish">
                                                 <!--Create a utensil (cooked) item for each dish-->
                                                 <button type="button" class="btn btn-outline-success fa-solid fa-utensils"></button>
@@ -93,18 +98,23 @@
                                     <!--If dish has been cooked, create a span with name of dish-->
                                     <% if(dishes[i].cooked === true) {%>
                                         <li class="dish list-group-item d-flex justify-content-between align-items-center">
-                                            <% if(dishes[i].recipeLink) {%> 
-                                                <a href="<%= dishes[i].recipeLink %>" id="<%= dishes[i]._id %>" target="_blank"><span><%= dishes[i].dishName %></span></a>
-                                            <%} else {%> 
-                                                <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
-                                            <%} %> 
+                                            <div>
+                                                <span class="badge rounded-pill bg-warning text-dark"><%= dishes[i].meal %></span>
+                                                <% if(dishes[i].recipeLink) {%> 
+                                                    <a href="<%= dishes[i].recipeLink %>" id="<%= dishes[i]._id %>" target="_blank">
+                                                        <span><%= dishes[i].dishName %></span>
+                                                    </a>
+                                                <%} else {%> 
+                                                    <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
+                                                <%} %> 
+                                            </div>
                                     <% } %>
                                 <% } %>
                             </ul>
                         </section>
                     </div>
 
-                    <div class="col-md-4 d-flex justify-content-center">
+                    <div class="col-md-4 px-3 d-flex justify-content-center">
 
                         <!-- Form - Add a Dish -->
 

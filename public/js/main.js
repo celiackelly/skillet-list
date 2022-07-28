@@ -25,7 +25,7 @@ Array.from(dish).forEach((element)=>{
 
 async function deleteDish(){
     //Get the _id of the to-do item associated with this delete button
-    const dishID = this.parentNode.parentNode.children[0].id
+    const dishID = this.parentNode.parentNode.children[0].children[1].id
     try{
         //Make a fetch call to the /deleteItem route on the server and send the todo item text in the body of the request  
         const response = await fetch('deleteDish', {
@@ -53,7 +53,7 @@ async function deleteDish(){
 
 async function markCooked(){
     //Get the _id of the dish
-    const dishID = this.parentNode.parentNode.children[0].id
+    const dishID = this.parentNode.parentNode.children[0].children[1].id
     try{
         //Make a fetch call to the /markCooked route on the server and send the dish _id in the body of the request  
         const response = await fetch('markCooked', {

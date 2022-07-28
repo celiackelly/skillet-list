@@ -19,3 +19,9 @@ h1 img {
     width: 3rem;
 }
 
+.badge {
+    font-size: .75rem;   
+    display: inline-block; 
+    width: 4rem;
+    margin-right: .5rem;
+}
