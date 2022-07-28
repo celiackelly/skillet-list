@@ -52,8 +52,11 @@ class DishLiBtnGroup {
         const editRecipeLinkInput = document.querySelector('#editRecipeLinkInput')
         const recipeLink = li.querySelector('.recipeLink')
         editRecipeLinkInput.value = recipeLink ? recipeLink.href : ''
+
+        //Add a data attribute with the dishID to the update button
+        document.querySelector('#update-btn').setAttribute('data-dishid', dishID)
     }
-    
+
     async delete(e) {
         //Get the _id of the dish associated with this delete button
         let li = e.target.closest('li')
@@ -65,7 +68,7 @@ class DishLiBtnGroup {
                 method: 'delete',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                'dishIDfromJS': dishID
+                'dishIDFromJS': dishID
                 })
             })
             const data = await response.json()
@@ -84,5 +87,34 @@ Array.from(dishLiBtnGroups).forEach((btnGroup)=>{
     new DishLiBtnGroup(btnGroup)
 })
 
+// When 'update' button in Edit Modal is clicked, send PUT request
+document.querySelector('#update-btn').addEventListener('click', editDishInfo)
+
+async function editDishInfo() {
+    //Get the _id of the dish being edited (previously set as a data-dishID attribute on the modal update button)
+    const dishID = document.querySelector('#update-btn').dataset.dishid
+    const dishName = document.querySelector('#editDishNameInput').value
+    const meal = document.querySelector('#editMealSelect').value
+    const recipeLink = document.querySelector('#editRecipeLinkInput').value
+
+    try {
+        const response = await fetch('editDishInfo', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+            'dishIDFromJS': dishID,
+            'dishNameFromJS': dishName, 
+            'mealFromJS': meal, 
+            'recipeLinkFromJS': recipeLink 
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
+
+    } catch(err){
+        console.log(err)
+    }
+}
 
 
