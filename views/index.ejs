@@ -60,28 +60,29 @@
 
                         <section class="hero p-3">
                             <h1 class="text-center"><img src="/img/skillet-icon.png" alt="Logo- Skillet with eggs, tomatoes, and spinach" class="d-inline-block align-text-bottom">What's Cooking?</h1>
-                                <ul class="dishes list-group">
+
+                                <ul class="list-group">
                                     <% for(let i=0; i < dishes.length; i++) {%>
                                         <% if(dishes[i].cooked === false) {%>
                                         <!--For each dish passed from the server, if dish has NOT been cooked, create li for dish-->
-                                        <li class="dish list-group-item d-flex justify-content-between align-items-center">
+                                        <li id="<%= dishes[i]._id %>" class="dish uncooked list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <span class="badge rounded-pill bg-warning text-dark"><%= dishes[i].meal %></span>
                                                 <% if(dishes[i].recipeLink) {%> 
-                                                    <a href="<%= dishes[i].recipeLink %>" id="<%= dishes[i]._id %>" target="_blank">
+                                                    <a href="<%= dishes[i].recipeLink %>" target="_blank">
                                                         <span><%= dishes[i].dishName %></span>
                                                     </a>
                                                 <%} else {%> 
-                                                    <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
+                                                    <span><%= dishes[i].dishName %></span>
                                                 <%} %> 
                                             </div>
                                             <div class="btn-group" role="group" aria-label="Edit this dish">
                                                 <!--Create a utensil (cooked) item for each dish-->
-                                                <button type="button" class="btn btn-outline-success fa-solid fa-utensils"></button>
+                                                <button type="button" class="btn btn-outline-success fa-solid fa-utensils" data-action="markCooked"></button>
                                                 <!--Create a pencil (edit) item for each dish-->
-                                                <button type="button" class="btn btn-outline-dark fa-solid fa-pencil"></button>
+                                                <button type="button" class="btn btn-outline-dark fa-solid fa-pencil" data-action="edit"></button>
                                                 <!--Create an X (delete) icon for each dish-->   
-                                                <button type="button" class="btn btn-outline-danger fa-solid fa-circle-xmark"></button>
+                                                <button type="button" class="btn btn-outline-danger fa-solid fa-circle-xmark" data-action="delete"></button>
                                             </div>
                                         </li>
                                         <% } %>
