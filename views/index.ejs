@@ -62,10 +62,14 @@
                             <h1 class="text-center"><img src="/img/skillet-icon.png" alt="Logo- Skillet with eggs, tomatoes, and spinach" class="d-inline-block align-text-bottom">What's Cooking?</h1>
 
                                 <ul class="list-group">
-                                    <% for(let i=0; i < dishes.length; i++) {%>
+                                    <% if (dishes.filter(dish => !dish.cooked).length === 0) {%> 
+                                        <li class="list-group-item">No recipes on your skillet list yet...</li>
+                                        <%} 
+                                    %>
+                                    <% for(let i = 0; i < dishes.length; i++) {%>
                                         <% if(dishes[i].cooked === false) {%>
                                         <!--For each dish passed from the server, if dish has NOT been cooked, create li for dish-->
-                                        <li id="<%= dishes[i]._id %>" class="dish uncooked list-group-item d-flex justify-content-between align-items-center">
+                                        <li id="<%= dishes[i]._id %>" class="dish list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <span class="badge mealBadge rounded-pill bg-warning text-dark"><%= dishes[i].meal %></span>
                                                 <% if(dishes[i].recipeLink) {%> 
@@ -95,10 +99,14 @@
                         <section class="p-3">
                             <h2 class="text-center">Recipe Box</h2>
                             <ul class="list-group">
+                                <% if (dishes.filter(dish => dish.cooked).length === 0) {%> 
+                                    <li class="list-group-item">No recipes in your recipe box yet...</li>
+                                    <%} 
+                                %>
                                 <% for(let i=0; i < dishes.length; i++) {%>
                                     <!--If dish has been cooked, create a span with name of dish-->
                                     <% if(dishes[i].cooked === true) {%>
-                                        <li class="dish list-group-item d-flex justify-content-between align-items-center">
+                                        <li id="<%= dishes[i]._id %>" class="dish list-group-item d-flex justify-content-between align-items-center">
                                             <div>
                                                 <span class="badge mealBadge rounded-pill bg-warning text-dark"><%= dishes[i].meal %></span>
                                                 <% if(dishes[i].recipeLink) {%> 
@@ -108,6 +116,10 @@
                                                 <%} else {%> 
                                                     <span id="<%= dishes[i]._id %>"><%= dishes[i].dishName %></span>
                                                 <%} %> 
+                                            </div>
+                                            <div class="btn-group" role="group" aria-label="Edit this dish">
+                                                <!--Create an X (delete) icon for each dish-->   
+                                                <button type="button" class="btn btn-outline-danger fa-solid fa-circle-xmark" data-action="delete"></button>
                                             </div>
                                     <% } %>
                                 <% } %>
@@ -159,6 +171,7 @@
 
         <footer class="bg-dark text-white p-3">
             <div class="container-fluid">
+                <span>&copy;2022 Celia Kelly</span>
                 <span>Image by <a href="https://www.rawpixel.com/" class="link-warning">rawpixel.com</a></span>
             </div>
         </footer>
