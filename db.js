@@ -10,7 +10,7 @@ let mongodb,
     dbConnectionStr = process.env.DB_STRING,    //get db connection string from .env
     dbName = 'dishes'
 
-const connect = async () => {
+async function connect() {
     try {
         const client = await MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 
@@ -34,5 +34,5 @@ function close(){
 module.exports = {
     connect,
     get,
-    close
+    close, 
 };
