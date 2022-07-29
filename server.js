@@ -2,28 +2,15 @@
 const express = require('express')
 //Create Express application
 const app = express()
-
-//Import MongoDB library; destructure to get access to ObjectId 
-const { MongoClient, ObjectId } = require('mongodb')
-//Assign local port number
 const PORT = 2121
-
 const expressLayouts = require('express-ejs-layouts')
-
-//Configure .env file, so that you can import secrets 
 require('dotenv').config()
 
-//Declare database, connection string, database name
-let db,  
-    dbConnectionStr = process.env.DB_STRING,    //get db connection string from .env
-    dbName = 'dishes'
+const { db, connectDB } = require('./db')
+connectDB()
 
-//Connect to MongoDB database
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
-    .then(client => {
-        console.log(`Connected to ${dbName} Database`) //once successfully connected, log message in console
-        db = client.db(dbName)  //assign the 'dishes' database to db variable
-    })
+const indexRouter = require('./routes/index')
+const dishesRouter = require('./routes/dishes')
 
 app.set('view engine', 'ejs')  //Set up app to use EJS as the HTML templating language
 app.set('layout', './layouts/layout')
@@ -33,36 +20,13 @@ app.use(express.urlencoded({ extended: true })) // Use Express' built-in middlew
 app.use(express.json()) //Use Express' json parser middleware
 app.use(expressLayouts)
 
+app.use('/', indexRouter)
+app.use('/dishes', dishesRouter)
+
 //Set up the server to listen on our port (if it's defined in .env), or whatever the port is
 app.listen(process.env.PORT || PORT, ()=>{
     //If successful, log message to console
     console.log(`Server running on port ${PORT}`)
-})
-
-//Handle GET (READ) requests to the main route
-app.get('/', async (request, response)=>{
-    //query the database to find all the dishes documents, and put them into an array
-    const dishes = await db.collection('dishes').find().toArray()  
-
-    //render the index.ejs file, passing in dishes as variable
-    response.render('index.ejs', { dishes })
-})
-
-//Handle POST (CREATE) requests on the dishes route 
-app.post('/dishes', (request, response) => {
-    //Add new a document to the db. 
-    db.collection('dishes').insertOne({
-        dishName: request.body.dishName,
-        meal: request.body.meal, 
-        recipeLink: request.body.recipeLink,  
-        cooked: false
-    })
-    .then(result => {
-        //If successful, log to the console and make a new GET request to reload the main route 
-        console.log('Dish Added') 
-        response.redirect('/')
-    })
-    .catch(error => console.error(error))  //If there's an error, log it
 })
 
 //Handle PUT (UPDATE) requests to the /markCooked route 
