@@ -5,7 +5,7 @@ class DishLiBtnGroup {
     }
 
     onClick(e) {
-        let action = e.target.dataset.action
+        const action = e.target.dataset.action
         if (action) {
             this[action](e)
         }
@@ -13,7 +13,7 @@ class DishLiBtnGroup {
 
     async markCooked(e) {
         //Get the _id of the dish associated with this markCooked button
-        let li = e.target.closest('li')
+        const li = e.target.closest('li')
         if (!li) return
         const dishID = li.id
 
@@ -36,7 +36,7 @@ class DishLiBtnGroup {
 
     populateEditModal(e) {
         //Get the _id of the dish associated with this edit button
-        let li = e.target.closest('li')
+        const li = e.target.closest('li')
         if (!li) return
         const dishID = li.id
 
@@ -59,7 +59,7 @@ class DishLiBtnGroup {
 
     async delete(e) {
         //Get the _id of the dish associated with this delete button
-        let li = e.target.closest('li')
+        const li = e.target.closest('li')
         if (!li) return
         const dishID = li.id
 
