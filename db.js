@@ -1,17 +1,21 @@
+/*
+Helpful article: https://mrvautin.com/re-use-mongodb-database-connection-in-routes/
+*/
+
 //Import MongoDB library; destructure to get access to ObjectId 
 const { MongoClient, ObjectId } = require('mongodb')
 
 //Declare database, connection string, database name
-let db,  
+let mongodb,  
     dbConnectionStr = process.env.DB_STRING,    //get db connection string from .env
     dbName = 'dishes'
 
-const connectDB = async () => {
+const connect = async () => {
     try {
         const client = await MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 
         console.log(`Connected to ${dbName} database`) //once successfully connected, log message in console
-        db = client.db(dbName)  //assign the 'dishes' database to db variable
+        mongodb = client.db(dbName)  //assign the 'dishes' database to db variable
 
     } catch (err) {
         console.log(err)
@@ -19,8 +23,16 @@ const connectDB = async () => {
     }
 }
 
+function get(){
+    return mongodb;
+}
+
+function close(){
+    mongodb.close();
+}
 
 module.exports = {
-    connectDB, 
-    db
+    connect,
+    get,
+    close
 };

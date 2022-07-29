@@ -6,8 +6,8 @@ const PORT = 2121
 const expressLayouts = require('express-ejs-layouts')
 require('dotenv').config()
 
-const { db, connectDB } = require('./db')
-connectDB()
+const db = require('./db')
+db.connect()
 
 const indexRouter = require('./routes/index')
 const dishesRouter = require('./routes/dishes')
@@ -33,7 +33,7 @@ app.listen(process.env.PORT || PORT, ()=>{
 //Triggered when a dish is clicked on the front end
 app.put('/markCooked', (request, response) => {
     // In the db 'dishes' collection, find the document by _id and update it
-    db.collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
+    db.get().collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
         //set the value of 'cooked' to true
         $set: {
             cooked: true
@@ -56,7 +56,7 @@ app.put('/markCooked', (request, response) => {
 //Triggered when a modal update btn is clicked on the front end
 app.put('/editDishInfo', (request, response) => {
     // In the db 'dishes' collection, find the document by _id and update it
-    db.collection('dishes').updateOne({_id: ObjectId(request.body.dishIDFromJS)},{
+    db.get().collection('dishes').updateOne({_id: ObjectId(request.body.dishIDFromJS)},{
         //update the values based on input data from client side
         $set: {
             dishName: request.body.dishNameFromJS, 
@@ -82,7 +82,7 @@ app.put('/editDishInfo', (request, response) => {
 //Do the opposite of the /markComplete route
 app.put('/markNotCooked', (request, response) => {
     // In the db 'dishes' collection, find the document by _id and update it
-    db.collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
+    db.get().collection('dishes').updateOne({_id: ObjectId(request.body.dishIDfromJS)},{
         $set: {
             cooked: false  //set the value of 'completed' to false
           }
@@ -101,7 +101,7 @@ app.put('/markNotCooked', (request, response) => {
 //Handle DELETE (DELETE) requests to the /deleteItem route
 app.delete('/deleteDish', (request, response) => {
     //Find the item in the 'dishes' collection where _id matches request.body and delete it
-    db.collection('dishes').deleteOne({_id: ObjectId(request.body.dishIDFromJS)})
+    db.get().collection('dishes').deleteOne({_id: ObjectId(request.body.dishIDFromJS)})
     .then(result => {
         console.log('Dish Deleted')
         response.json('Dish Deleted')

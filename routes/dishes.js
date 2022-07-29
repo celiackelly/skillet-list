@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../db')
 
 //Handle POST (CREATE) requests on the dishes route 
-router.post('/dishes', (request, response) => {
+router.post('/', (request, response) => {
     //Add new a document to the db. 
-    db.collection('dishes').insertOne({
+    db.get().collection('dishes').insertOne({
         dishName: request.body.dishName,
         meal: request.body.meal, 
         recipeLink: request.body.recipeLink,  
