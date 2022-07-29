@@ -1,4 +1,5 @@
 # Skillet List
+![Skillet logo](https://github.com/celiackelly/recommendation-manager/blob/1958cc6ed8a11d076026f383f6b71235c849b1ab/recommendation-manager-cover.png)
 
 **Skillet List** is a tool for creative cooks who love trying new recipes.  
  - Add recipes to your Skillet List, tag them by meal, and link to the recipe source. 
