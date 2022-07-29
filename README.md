@@ -21,6 +21,7 @@ It also uses the **Bootstrap** CSS framework.
  
 
 ## Next Steps:
+[] Implement login functionality.
 [] Add additional url validation to ensure that users can input recipe links without the http or https scheme (e.g. www.foodnetwork.com) and have them work as expected.
 [] Change background colors of meal badges to differentiate them easily. 
 [] Add recipe rating and notes features. 
