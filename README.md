@@ -1,5 +1,4 @@
-# Skillet List
-![Skillet logo](https://github.com/celiackelly/recommendation-manager/blob/1958cc6ed8a11d076026f383f6b71235c849b1ab/recommendation-manager-cover.png)
+# <a href="https://github.com/celiackelly/skillet-list"><img src="https://github.com/celiackelly/skillet-list/blob/0d05a3f3875d38201a577039ed39600ddae4ca3f/public/img/skillet-icon.png" height="60px" alt="Logo- s skillet with eggs, tomatoes, and spinach">Skillet List</a> 
 
 **Skillet List** is a tool for creative cooks who love trying new recipes.  
  - Add recipes to your Skillet List, tag them by meal, and link to the recipe source. 
