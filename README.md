@@ -3,14 +3,17 @@
 **Skillet List** is a tool for creative cooks who love trying new recipes.  
  - Add recipes to your Skillet List, tag them by meal, and link to the recipe source. 
  - Come back often for inspiration as you plan your meals. What will you cross off your Skillet List this week? 
- - Once you've cooked a recipe, check it off your Skillet List and save it in your Recipe Box. 
+ - Once you've cooked a recipe, cross it off your Skillet List and save it in your Recipe Box. 
   
 ## How It's Made:
 
-Skillet List is a full-stack application built with **Node.js, Express, MongoDB**.
+Skillet List is a full-stack application built with **Node.js, Express, MongoDB**. 
+
+It uses **EJS (Embedded JavaScript)** as its view engine. 
+
+It also uses the **Bootstrap** CSS framework. 
 
 ## Lessons Learned:
-
 
 
 ## Optimizations: 
