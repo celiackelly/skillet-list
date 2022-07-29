@@ -3,7 +3,7 @@ Helpful article: https://mrvautin.com/re-use-mongodb-database-connection-in-rout
 */
 
 //Import MongoDB library; destructure to get access to ObjectId 
-const { MongoClient, ObjectId } = require('mongodb')
+const { MongoClient } = require('mongodb')
 
 //Declare database, connection string, database name
 let mongodb,  

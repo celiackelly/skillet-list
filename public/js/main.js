@@ -18,12 +18,12 @@ class DishLiBtnGroup {
         const dishID = li.id
 
         try {
-            const response = await fetch('markCooked', {
+            const response = await fetch(`dishes/${dishID}/mark-cooked`, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                'dishIDfromJS': dishID
-                })
+                // body: JSON.stringify({
+                // 'dishIDfromJS': dishID
+                // })
             })
             const data = await response.json()
             console.log(data)
@@ -64,12 +64,12 @@ class DishLiBtnGroup {
         const dishID = li.id
 
         try {
-            const response = await fetch('deleteDish', {
+            const response = await fetch(`dishes/${dishID}`, {
                 method: 'delete',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                'dishIDFromJS': dishID
-                })
+                // body: JSON.stringify({
+                // 'dishIDFromJS': dishID
+                // })
             })
             const data = await response.json()
             console.log(data)
@@ -98,11 +98,11 @@ async function editDishInfo() {
     const recipeLink = document.querySelector('#editRecipeLinkInput').value
 
     try {
-        const response = await fetch('editDishInfo', {
+        const response = await fetch(`dishes/${dishID}/edit`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-            'dishIDFromJS': dishID,
+            // 'dishIDFromJS': dishID,
             'dishNameFromJS': dishName, 
             'mealFromJS': meal, 
             'recipeLinkFromJS': recipeLink 
