@@ -4,14 +4,14 @@
  - Add recipes to your Skillet List, tag them by meal, and link to the recipe source. 
  - Come back often for inspiration as you plan your meals. What will you cross off your Skillet List this week? 
  - Once you've cooked a recipe, cross it off your Skillet List and save it in your Recipe Box. 
+
+<img src="https://github.com/celiackelly/skillet-list/blob/564a2e280ad18bc6ee301878c5b6432941e31a7b/public/img/screenshot.png" width="800px">
   
 ## How It's Made:
 
 Skillet List is a full-stack application built with **Node.js, Express, MongoDB**. 
 
-It uses **EJS (Embedded JavaScript)** as its view engine. 
-
-It also uses the **Bootstrap** CSS framework. 
+It uses **EJS (Embedded JavaScript)** as its view engine, as well as the **Bootstrap** framework for styling. 
 
 ## Lessons Learned:
 
@@ -21,7 +21,7 @@ It also uses the **Bootstrap** CSS framework.
  
 
 ## Next Steps:
-[] Implement login functionality.
-[] Add additional url validation to ensure that users can input recipe links without the http or https scheme (e.g. www.foodnetwork.com) and have them work as expected.
-[] Change background colors of meal badges to differentiate them easily. 
-[] Add recipe rating and notes features. 
+- [ ] Implement login functionality.
+- [ ] Add additional url validation to ensure that users can input recipe links without the http or https scheme (e.g. www.foodnetwork.com) and have them work as expected.
+- [ ] Change background colors of meal badges to differentiate them easily. 
+- [ ] Add recipe rating and notes features. 
