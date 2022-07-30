@@ -35,56 +35,53 @@ router.delete('/:id', (request, response) => {
     .catch(error => console.error(error))
 })
 
-// Handle PUT (UPDATE) requests to the /dishes/:id/mark-cooked route 
-// Triggered when utensil btn is clicked on front end
-router.put('/:id/mark-cooked', (request, response) => {
+// Handle PUT (UPDATE) requests to the /dishes/:id 
+// Triggered when utensil btn is clicked on front end (to mark as cooked), or when edit modal is submitted (to edit info)
+router.put('/:id', (request, response) => {
 
     // In the db 'dishes' collection, find the document by _id and update it
     const dishId = request.params.id
-    db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
-        //set the value of 'cooked' to true
-        $set: {
-            cooked: true
-        }
-    },{
-        upsert: false  // Doesn't create a new document if the query doesn't find a matching document
-    })
-    .then(result => {
-        //If successful, log to the console and send 'Marked Cooked' response to the front end
-        console.log('Marked Cooked')
-        //I think .json() also automatically sets the HTTP status code to 200 and the content-type to application/json, which is handy
-        response.json('Marked Cooked')
-    })
-    //catch any errors and log them
-    .catch(error => console.error(error))
+
+    if (request.body.cooked) {
+        db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
+            //set the value of 'cooked' to true
+            $set: {
+                cooked: true
+            }
+        },{
+            upsert: false  // Doesn't create a new document if the query doesn't find a matching document
+        })
+        .then(result => {
+            //If successful, log to the console and send 'Marked Cooked' response to the front end
+            console.log('Marked Cooked')
+            //I think .json() also automatically sets the HTTP status code to 200 and the content-type to application/json, which is handy
+            response.json('Marked Cooked')
+        })
+        //catch any errors and log them
+        .catch(error => console.error(error))
+    } else {
+        db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
+            //update the values based on input data from client side
+            $set: {
+                dishName: request.body.dishNameFromJS, 
+                meal: request.body.mealFromJS, 
+                recipeLink: request.body.recipeLinkFromJS
+            }
+        },{
+            upsert: false  // Doesn't create a new document if the query doesn't find a matching document
+        })
+        .then(result => {
+            //If successful, log to the console and send 'Marked Cooked' response to the front end
+            console.log('Dish Updated')
+            //I think .json() also automatically sets the HTTP status code to 200 and the content-type to application/json, which is handy
+            response.json('Dish Updated')
+        })
+        //catch any errors and log them
+        .catch(error => console.error(error))
+
+    }
 })
 
-
-// Handle PUT (UPDATE) requests to the /:id/edit route 
-// Triggered when a modal update btn is clicked on the front end
-router.put('/:id/edit', (request, response) => {
-    
-    // In the db 'dishes' collection, find the document by _id and update it
-    const dishId = request.params.id
-    db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
-        //update the values based on input data from client side
-        $set: {
-            dishName: request.body.dishNameFromJS, 
-            meal: request.body.mealFromJS, 
-            recipeLink: request.body.recipeLinkFromJS
-        }
-    },{
-        upsert: false  // Doesn't create a new document if the query doesn't find a matching document
-    })
-    .then(result => {
-        //If successful, log to the console and send 'Marked Cooked' response to the front end
-        console.log('Dish Updated')
-        //I think .json() also automatically sets the HTTP status code to 200 and the content-type to application/json, which is handy
-        response.json('Dish Updated')
-    })
-    //catch any errors and log them
-    .catch(error => console.error(error))
-})
 
 // //NOTHING TRIGGERS THIS RIGHT NOW
 // //Handle PUT (UPDATE) requests to the /markNotCooked route

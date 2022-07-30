@@ -18,12 +18,12 @@ class DishLiBtnGroup {
         const dishID = li.id
 
         try {
-            const response = await fetch(`dishes/${dishID}/mark-cooked`, {
+            const response = await fetch(`dishes/${dishID}`, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
-                // body: JSON.stringify({
-                // 'dishIDfromJS': dishID
-                // })
+                body: JSON.stringify({
+                'cooked': true
+                })
             })
             const data = await response.json()
             console.log(data)
@@ -98,11 +98,10 @@ async function editDishInfo() {
     const recipeLink = document.querySelector('#editRecipeLinkInput').value
 
     try {
-        const response = await fetch(`dishes/${dishID}/edit`, {
+        const response = await fetch(`dishes/${dishID}`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-            // 'dishIDFromJS': dishID,
             'dishNameFromJS': dishName, 
             'mealFromJS': meal, 
             'recipeLinkFromJS': recipeLink 
