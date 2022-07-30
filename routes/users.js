@@ -6,32 +6,15 @@ const bcrypt = require('bcrypt')
 
 //Handle GET (READ) requests for the individual user dashboard
 //I want this endpoint to be /users/:id, but I don't know how to set that up right yet...
-router.get('/dashboard', async (request, response) => {
+router.get('/:id/dashboard', async (request, response) => {
 
-    //query the database to find all the dishes documents
-    const dishes = await Dish.find()
+    const user = await User.findById(request.params.id)
 
-    //query the database to find all the dishes documents for THIS USER
-    // const dishes = await Dish.find({ userId: request.body.userId})
+    // query the database to find all the dishes documents for THIS USER
+    const dishes = await Dish.find({ userId: user._id})
 
     //render the dashboard.ejs file for this user, passing in dishes as variable
-    response.render('dashboard.ejs', { dishes, title: 'Skillet List | Dashboard' })
-})
-
-//Sign up - post to /users to create an account
-router.post('/', async (request, response) => {
-    try {
-        const hashedPassword = await bcrypt.hash(request.body.password, 10)
-        await User.create({
-            email: request.body.email, 
-            password: hashedPassword
-        })
-        console.log('User added')
-        response.redirect('/login')
-    } catch(err) {
-        console.log(err)
-        response.render('sign-up.ejs', {title: 'Skillet List | Sign up', errorMessage: 'Error: Please try again.'})
-    }
+    response.render('users/dashboard.ejs', { dishes : dishes, title: 'Skillet List | Dashboard' })
 })
 
 module.exports = router

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Dish = require('../models/Dish')
 
-//Handle POST (CREATE) requests on the dishes route 
+//POST to /dishes to create a dish 
 router.post('/', async (request, response) => {
     try {
         await Dish.create({
@@ -20,7 +20,7 @@ router.post('/', async (request, response) => {
     }
 })
 
-// //Handle DELETE (DELETE) requests on the /dishes/:id
+// DELETE /dishes/:id - Delete a dish
 // Triggered when red X delete btn is clicked on front end
 router.delete('/:id', async (request, response) => {
     try {
@@ -33,7 +33,7 @@ router.delete('/:id', async (request, response) => {
     }
 })
 
-// Handle PUT (UPDATE) requests to the /dishes/:id 
+// PUT /dishes/:id - Update a dish
 // Triggered when utensil btn is clicked on front end (to mark as cooked), or when edit modal is submitted (to edit info)
 router.put('/:id', async (request, response) => {
 
