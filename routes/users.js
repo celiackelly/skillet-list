@@ -6,10 +6,10 @@ const Dish = require("../models/Dish")
 //I want this endpoint to be /users/:id, but I don't know how to set that up right yet...
 router.get('/', async (request, response) => {
 
-    //query the database to find all the dishes documents, and put them into an array
+    //query the database to find all the dishes documents
     const dishes = await Dish.find()
 
-    //query the database to find all the dishes documents, and put them into an array
+    //query the database to find all the dishes documents for THIS USER
     // const dishes = await Dish.find({ userId: request.body.userId})
 
     //render the dashboard.ejs file for this user, passing in dishes as variable
