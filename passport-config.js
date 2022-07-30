@@ -1,3 +1,47 @@
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const User = require('./models/User')
+const bcrypt = require('bcrypt')
+
+exports.localStrategy = passport.use(
+    new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+        User.findOne({email: email}, (err, user) => {
+            if (err) {
+                return done(err)
+            }
+            if (!user) {
+                return done(null, false, {message: 'No user with that email.'})
+            }
+            bcrypt.compare(password, user.password, (err, response) => {
+                if (response) {
+                    //passwords match! user logins 
+                    return done(null, user)
+                } else {
+                    //passwords do not match 
+                    return done(null, false, {message: 'Incorrect password'})
+                }
+            })
+        })
+    })
+)
+
+exports.serializeUser = passport.serializeUser(function(user, done) {
+    done(null, user.id)
+})
+
+exports.deserializeUser = passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+    done(err, user)
+    })
+})
+
+exports.checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect("/login")
+}
+
+
+/*
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
@@ -11,6 +55,8 @@ function initializePassport(passport, getUserByEmail) {
             //1st param - error (null), 2nd param - matching user? (false)
         }
         try {
+            console.log(user)
+            console.log(password, user.password)
             if (await bcrypt.compare(password, user.password)) {
                 //Password matches user password- successful authentication
                 //call the done function with no error and the authenticated user
@@ -30,3 +76,5 @@ function initializePassport(passport, getUserByEmail) {
 }
 
 module.exports = initializePassport
+
+*/

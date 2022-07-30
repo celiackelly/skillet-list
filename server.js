@@ -9,19 +9,19 @@ const app = express()
 const PORT = 2121
 const path = require('path')
 const expressLayouts = require('express-ejs-layouts')
+const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-const passport = require('passport')
-const User = require('./models/User')
+// const User = require('./models/User')
 
 const connectDB = require('./db')
 connectDB()
-
-const initializePassport = require('./passport-config')
-initializePassport(
-    passport, 
-    email => User.findOne({email: email})
-)
+require('./passport-config')
+// const initializePassport = require('./passport-config')
+// initializePassport(
+//     passport, 
+//     email => User.findOne({email: email})
+// )
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')

@@ -3,6 +3,7 @@ const app = express()
 const router = express.Router()
 const passport = require('passport')
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
 
 //GET home page (index.ejs)
 router.get('/', async (request, response)=>{
@@ -45,8 +46,9 @@ router.post('/', async (request, response) => {
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login', 
     failureFlash: true
-}), (request, response) => {
-    response.redirect(`users/${request.user._id}/dashboard.ejs`)
+}), function (request, response) {
+    console.log(request)
+    response.redirect(`users/${request.user._id}/dashboard`)
 })
 
 //Handle DELETE requests to the /auth route - to logout/deauthenticate a user
