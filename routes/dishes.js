@@ -32,42 +32,36 @@ router.delete('/:id', async (request, response) => {
     }
 })
 
+// Handle PUT (UPDATE) requests to the /dishes/:id 
+// Triggered when utensil btn is clicked on front end (to mark as cooked), or when edit modal is submitted (to edit info)
+router.put('/:id', async (request, response) => {
 
-
-
-// // Handle PUT (UPDATE) requests to the /dishes/:id 
-// // Triggered when utensil btn is clicked on front end (to mark as cooked), or when edit modal is submitted (to edit info)
-// router.put('/:id', async (request, response) => {
-
-//     // In the db 'dishes' collection, find the document by _id and update it
-//     const dishId = request.params.id
-//     const updateAction = request.body.updateAction
-//     try {
-//         if (updateAction === 'markCooked') {
-//             const result = await db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
-//                 $set: {
-//                     cooked: true
-//                 }
-//             },{
-//                 upsert: false  
-//             })
-//         }
-//         if (updateAction === 'editDishInfo') {
-//             const result = await db.get().collection('dishes').updateOne({_id: ObjectId(dishId)},{
-//                 $set: {
-//                     dishName: request.body.dishNameFromJS, 
-//                     meal: request.body.mealFromJS, 
-//                     recipeLink: request.body.recipeLinkFromJS
-//                 }
-//             },{
-//                 upsert: false 
-//             })
-//         }
-//         console.log(`Dish Updated: ${updateAction}`)
-//         response.json(`Dish Updated: ${updateAction}`)
-//     } catch(err) {
-//         console.log(err)
-//     }
-// })
+    //Find the Dish where _id matches request.params.id and update it
+    const updateAction = request.body.updateAction
+    try {
+        if (updateAction === 'markCooked') {
+            await Dish.findByIdAndUpdate(request.params.id, {
+                cooked: true
+            }, {
+                upsert: false, 
+                runValidators: true
+            })
+        }
+        if (updateAction === 'editDishInfo') {
+            await Dish.findByIdAndUpdate(request.params.id, {
+                dishName: request.body.dishNameFromJS, 
+                meal: request.body.mealFromJS, 
+                recipeLink: request.body.recipeLinkFromJS
+            }, {
+                upsert: false, 
+                runValidators: true
+            })
+        }
+        console.log(`Dish Updated: ${updateAction}`)
+        response.json(`Dish Updated: ${updateAction}`)
+    } catch(err) {
+        console.log(err)
+    }
+})
 
 module.exports = router
