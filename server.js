@@ -6,8 +6,9 @@ const PORT = 2121
 const expressLayouts = require('express-ejs-layouts')
 require('dotenv').config()
 
-const db = require('./db')
-db.connect()
+const mongoose = require('mongoose')
+const connectDB = require('./db')
+connectDB()
 
 const indexRouter = require('./routes/index')
 const dishesRouter = require('./routes/dishes')
