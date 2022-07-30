@@ -9,7 +9,8 @@ router.post('/', async (request, response) => {
             dishName: request.body.dishName,
             meal: request.body.meal, 
             recipeLink: request.body.recipeLink,  
-            cooked: false
+            cooked: false, 
+            userId: request.user.id
         })
         console.log('Dish Added') 
         response.redirect('/')

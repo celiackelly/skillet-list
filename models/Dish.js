@@ -17,7 +17,12 @@ const dishSchema = new mongoose.Schema({
         type: Boolean, 
         required: true, 
         default: false
-    }
+    }, 
+    userId: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', 
+        //type: String,
+        required: true,
+    },
 })
 
 module.exports = mongoose.model('Dish', dishSchema)
