@@ -22,7 +22,7 @@ class DishLiBtnGroup {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                'cooked': true
+                'updateAction': 'markCooked'
                 })
             })
             const data = await response.json()
@@ -102,6 +102,7 @@ async function editDishInfo() {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
+            'updateAction': 'editDishInfo',
             'dishNameFromJS': dishName, 
             'mealFromJS': meal, 
             'recipeLinkFromJS': recipeLink 

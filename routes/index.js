@@ -8,11 +8,7 @@ router.get('/', async (request, response)=>{
     const dishes = await db.get().collection('dishes').find().toArray()  
 
     //render the index.ejs file, passing in dishes as variable
-    response.render('index.ejs', { dishes })
-
-    //pass in the title
-    //res.render('course', { title: 'Course', course, studentNames })
-
+    response.render('index.ejs', { dishes, title: 'Skillet List | Home' })
 })
 
 module.exports = router
