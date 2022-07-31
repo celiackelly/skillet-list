@@ -52,10 +52,9 @@ router.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     response.redirect(`users/${request.user._id}/dashboard`)
 })
 
-//Can't figure out how to make this a DELETE instead of a GET yet
-//method-override only seems to work with forms, not links
-//Handle DELETE requests to the /logout route - to logout/deauthenticate a user
-router.get('/logout', checkAuthenticated, async (request, response)=>{
+//Handle DELETE requests to the /logout route - to logout/deauthenticate a use
+//Custom middleware in server.js handles overriding the link's GET method
+router.delete('/logout', checkAuthenticated, async (request, response)=>{
     request.logOut(err => {
         if (err) { return next(err)}
     })

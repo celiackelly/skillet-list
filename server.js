@@ -11,7 +11,6 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 require('./passport-config')
-// const methodOverride = require('method-override')
 
 const connectDB = require('./db')
 connectDB()
@@ -42,7 +41,19 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     next();
 });
-// app.use(methodOverride('_method'))
+
+//Middleware to override a link's GET method with DELETE 
+//Must use the query parameter _method (e.g.: href="/logout?_method=DELETE")
+app.use( function( req, res, next ) {
+    // if _method is a query parameter...
+    if ( req.query._method == 'DELETE' ) {
+        // change the original METHOD into DELETE method 
+        req.method = 'DELETE';
+        // and set requested url to the path
+        req.url = req.path;
+    }       
+    next(); 
+});
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
