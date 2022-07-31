@@ -10,10 +10,11 @@ router.post('/', async (request, response) => {
             meal: request.body.meal, 
             recipeLink: request.body.recipeLink,  
             cooked: false, 
-            userId: request.user.id
+            userId: request.user._id
         })
         console.log('Dish Added') 
-        response.redirect('/')
+        //Not working yet- probably because sessions aren't configured yet
+        response.redirect(`/users/${request.user._id}/dashboard`)
     } catch(err) {
         console.log(err)
         response.render('/', {errorMessage: 'Error creating dish'})

@@ -2,9 +2,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
-// Import Express package and assign to variable
 const express = require('express')
-//Create Express application
 const app = express()
 const PORT = 2121
 const path = require('path')
@@ -12,16 +10,11 @@ const expressLayouts = require('express-ejs-layouts')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-// const User = require('./models/User')
+require('./passport-config')
+// const methodOverride = require('method-override')
 
 const connectDB = require('./db')
 connectDB()
-require('./passport-config')
-// const initializePassport = require('./passport-config')
-// initializePassport(
-//     passport, 
-//     email => User.findOne({email: email})
-// )
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -41,14 +34,19 @@ app.use(session({
     resave: false, 
     saveUninitialized: false
 }))
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Lets you access currentUser in ejs files (to change the navbar links based on whether a user is signed in)
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
+// app.use(methodOverride('_method'))
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/dishes', dishesRouter)
-
-
-app.use(passport.initialize())
-app.use(passport.session())
 
 //Set up the server to listen on our port (if it's defined in .env), or whatever the port is
 app.listen(process.env.PORT || PORT, ()=>{
