@@ -52,7 +52,7 @@ app.use( function( req, res, next ) {
         // and set requested url to the path
         req.url = req.path;
     }       
-    next(); s
+    next(); 
 });
 
 app.use('/', indexRouter)
