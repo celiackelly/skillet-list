@@ -4,8 +4,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
-const PORT = 2121
 const path = require('path')
+const PORT = process.env.PORT
 const expressLayouts = require('express-ejs-layouts')
 const passport = require('passport')
 const flash = require('express-flash')
@@ -52,7 +52,7 @@ app.use( function( req, res, next ) {
         // and set requested url to the path
         req.url = req.path;
     }       
-    next(); 
+    next(); s
 });
 
 app.use('/', indexRouter)
