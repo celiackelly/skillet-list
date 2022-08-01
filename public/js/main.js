@@ -18,16 +18,14 @@ class DishLiBtnGroup {
         const dishID = li.id
 
         try {
-            const response = await fetch(`dishes/${dishID}`, {
+            const response = await fetch(`/dishes/${dishID}`, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                 'updateAction': 'markCooked'
                 })
             })
-            const data = await response.json()
-            console.log(data)
-            location.reload()
+            window.location = response.url  
 
         } catch(err){
             console.log(err)
@@ -64,16 +62,11 @@ class DishLiBtnGroup {
         const dishID = li.id
 
         try {
-            const response = await fetch(`dishes/${dishID}`, {
+            const response = await fetch(`/dishes/${dishID}`, {
                 method: 'delete',
                 headers: {'Content-Type': 'application/json'},
-                // body: JSON.stringify({
-                // 'dishIDFromJS': dishID
-                // })
             })
-            const data = await response.json()
-            console.log(data)
-            location.reload()
+            window.location = response.url  
 
         } catch(err){
             console.log(err)
@@ -98,7 +91,7 @@ async function editDishInfo() {
     const recipeLink = document.querySelector('#editRecipeLinkInput').value
 
     try {
-        const response = await fetch(`dishes/${dishID}`, {
+        const response = await fetch(`/dishes/${dishID}`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -108,9 +101,7 @@ async function editDishInfo() {
             'recipeLinkFromJS': recipeLink 
             })
         })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
+        window.location = response.url  
 
     } catch(err){
         console.log(err)

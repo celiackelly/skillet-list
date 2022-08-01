@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const Dish = require('../models/Dish')
+const { checkAuthenticated } = require('../passport-config')
+const { checkNotAuthenticated } = require('../passport-config')
 
 //POST to /dishes to create a dish 
-router.post('/', async (request, response) => {
+router.post('/', checkAuthenticated, async (request, response) => {
     try {
         await Dish.create({
             dishName: request.body.dishName,
@@ -13,30 +15,30 @@ router.post('/', async (request, response) => {
             userId: request.user._id
         })
         console.log('Dish Added') 
-        //Not working yet- probably because sessions aren't configured yet
-        response.redirect(`/users/${request.user._id}/dashboard`)
+        response.redirect(303, `/users/${request.user._id}/dashboard`)
     } catch(err) {
         console.log(err)
-        response.render('/', {errorMessage: 'Error creating dish'})
+        response.redirect(303, '/')
     }
 })
 
 // DELETE /dishes/:id - Delete a dish
 // Triggered when red X delete btn is clicked on front end
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', checkAuthenticated, async (request, response) => {
     try {
         //Find the Dish where _id matches request.params.id and delete it
         await Dish.findByIdAndDelete(request.params.id)
         console.log('Dish Deleted')
-        response.json('Dish Deleted')
+        response.redirect(303, `/users/${request.user._id}/dashboard`)
     } catch(err) {
-        console.log(error)
+        console.log(err)
+        response.redirect(303, `/users/${request.user._id}/dashboard`)
     }
 })
 
 // PUT /dishes/:id - Update a dish
 // Triggered when utensil btn is clicked on front end (to mark as cooked), or when edit modal is submitted (to edit info)
-router.put('/:id', async (request, response) => {
+router.put('/:id', checkAuthenticated, async (request, response) => {
 
     //Find the Dish where _id matches request.params.id and update it
     const updateAction = request.body.updateAction
@@ -60,9 +62,10 @@ router.put('/:id', async (request, response) => {
             })
         }
         console.log(`Dish Updated: ${updateAction}`)
-        response.json(`Dish Updated: ${updateAction}`)
+        response.redirect(303, `/users/${request.user._id}/dashboard`)
     } catch(err) {
         console.log(err)
+        response.redirect(303, `/users/${request.user._id}/dashboard`)
     }
 })
 
