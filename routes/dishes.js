@@ -62,6 +62,9 @@ router.put('/:id', checkAuthenticated, async (request, response) => {
             })
         }
         console.log(`Dish Updated: ${updateAction}`)
+        //By default, Express uses HTTP 302 for redirect, but this prevents PUT/POST requests from being redirected, 
+        //so you have to set the code to 303
+        //https://expressjs.com/en/api.html#res.redirect - also note the leading vs. trailing slashes
         response.redirect(303, `/users/${request.user._id}/dashboard`)
     } catch(err) {
         console.log(err)

@@ -25,6 +25,7 @@ class DishLiBtnGroup {
                 'updateAction': 'markCooked'
                 })
             })
+            //window.location or simply location object is used to get information about the location of the current web page (document) and also to modify it.
             window.location = response.url  
 
         } catch(err){
