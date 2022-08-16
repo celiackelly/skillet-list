@@ -21,7 +21,7 @@ Within the buttons' callback functions (`delete()`, `markCooked()`, `populateEdi
 
 
 ## Optimizations: 
-- [ ] I believe I can take the lessons learned above to further simplify the event listeners for the button groups. I can refactor this code to have one event listener for the entire Skillet List `<ul>`, which listens for any button clicks on any of the button groups inside it. If the target of the click is not a button, the function will immediately return. This refactoring will make the code even more efficient. 
+- I believe I can take the lessons learned above to further simplify the event listeners for the button groups. I can refactor this code to have one event listener for the entire Skillet List `<ul>`, which listens for any button clicks on any of the button groups inside it. If the target of the click is not a button, the function will immediately return. This refactoring will make the code even more efficient. 
  
  
 ## Next Steps:
