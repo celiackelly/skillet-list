@@ -13,7 +13,7 @@ main {
 
 #home-wrapper {
     min-height: 80vh;
-    background-image: url(/img/bg-food.jpg);
+    background-image: url(https://res.cloudinary.com/celiackelly/image/upload/q_70/v1664330552/Skillet%20List/bg-food_nzw7ge.jpg);
     box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.3);
     background-size: cover;
     background-repeat: no-repeat;
